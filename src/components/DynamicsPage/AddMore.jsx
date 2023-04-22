@@ -13,9 +13,10 @@ import { useTranslation } from 'react-i18next';
 
 const AddMore = () => {
   const { t } = useTranslation();
-  const { leftAcumulatedMoneyToMeter } = useSelector(
+  const { leftAcumulatedMoneyToMeter = '...' } = useSelector(
     dynamicSelectors.getChartData
   );
+
   return (
     <div className={css.addMoreBox}>
       <p className={css.addMoreTitle}>
@@ -23,7 +24,10 @@ const AddMore = () => {
         <span className={css.addMoreMeter}>{t('dynamics.1sqM')}</span>{' '}
         {t('dynamics.missingInfoSecond')}
         <span className={css.addMoreSum}>
-          {leftAcumulatedMoneyToMeter} &#8372;
+          {leftAcumulatedMoneyToMeter.length >= 13
+            ? leftAcumulatedMoneyToMeter.slice(0, 13) + '...'
+            : leftAcumulatedMoneyToMeter}
+          &#8372;
         </span>
       </p>
       <picture>

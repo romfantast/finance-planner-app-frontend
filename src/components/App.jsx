@@ -16,7 +16,6 @@ import { Modal } from './Modal/Modal';
 import { ModalLogin } from './Modal/ModalLogin';
 import { ModalRegister } from './Modal/ModalRegister';
 import { Verified } from './Modal/Verified';
-import LanguageSwitcher from 'components/LanguageSwitcher/LanguageSwitcher';
 import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
@@ -114,7 +113,6 @@ export const App = () => {
           />
         </Route>
       </Routes>
-      <LanguageSwitcher />
     </>
   );
 };

@@ -65,7 +65,11 @@ export const ModalRegister = () => {
   return !isSendEmail ? (
     <div className={css.box}>
       <p className={css.title}>{t('registration.title')}</p>
-      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        autoComplete="off"
+        className={css.form}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <label>
           <span className={css.label}>{t('registration.name')}</span>
           <input

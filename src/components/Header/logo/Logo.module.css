@@ -1,3 +1,6 @@
+.wrapperLogo {
+  position: relative;
+}
 .logoTablet ,
 .logoDesktop {
   width: 138px;

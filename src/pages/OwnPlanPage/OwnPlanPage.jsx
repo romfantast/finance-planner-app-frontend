@@ -3,9 +3,13 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addPersonalPlanAPI,
-  currentPersonalPlanAPI
+  currentPersonalPlanAPI,
 } from 'redux/plan/plan-operations';
-import { selectorAccumPeriod, selectorPlanData, isLoading } from 'redux/plan/plan-selectors';
+import {
+  selectorAccumPeriod,
+  selectorPlanData,
+  isLoading,
+} from 'redux/plan/plan-selectors';
 import { Container } from 'components/Container/Container';
 import Loader from 'components/Loader/Loader';
 import PeriodPlan from 'components/OwnPlan/PeriodPlan/PeriodPlan';
@@ -17,9 +21,10 @@ import { Notify } from 'notiflix';
 const OwnPlanPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isPlanExist = useSelector(selectorPlanData);
   const newPlanData = useSelector(selectorPlanData);
   const accumPeriod = useSelector(selectorAccumPeriod);
-  const loaded = useSelector(isLoading)
+  const loaded = useSelector(isLoading);
   const [planData, setPlanData] = useState({
     salary: newPlanData?.salary || '',
     passiveIncome: newPlanData?.passiveIncome || '',
@@ -33,17 +38,21 @@ const OwnPlanPage = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (isPlanExist) {
+      navigate('/cashflow');
+    }
     periodPlan = {
       years: accumPeriod?.years,
       months: accumPeriod?.months,
     };
     if (
-      !planData.salary ||
-      !planData.passiveIncome ||
-      !planData.savings ||
-      !planData.cost ||
-      !planData.footage ||
-      !planData.procent
+      (!planData.salary ||
+        !planData.passiveIncome ||
+        !planData.savings ||
+        !planData.cost ||
+        !planData.footage ||
+        !planData.procent) &&
+      !isPlanExist
     ) {
       Notify.warning('All fields is required.');
     }
@@ -55,31 +64,35 @@ const OwnPlanPage = () => {
           ...periodPlan,
         })
       )
-      .then(()=> {
-        Notify.success('Your personal plan was saved!');
-      })
-      .catch(err => {
-        Notify.failure(err.message);
-      })
-    // If user is regular => refresh the data and send to DB and show the succes message
+        .then(() => {
+          Notify.success('Your personal plan was saved!');
+        })
+        .catch(err => {
+          Notify.failure(err.message);
+        });
+      // If user is regular => refresh the data and send to DB and show the succes message
     } else if (!deepEqual(newPlanData, planData)) {
       dispatch(
         currentPersonalPlanAPI({
           ...planData,
           ...periodPlan,
         })
-      ).then(()=> {
-        Notify.success('Your personal plan was refreshed!');
-      }).then(res => {
-        navigate('/cashflow');
-      }).catch(err => {
-        Notify.failure(err.message);
-      })
+      )
+        .then(() => {
+          Notify.success('Your personal plan was refreshed!');
+        })
+        .then(res => {
+          navigate('/cashflow');
+        })
+        .catch(err => {
+          Notify.failure(err.message);
+        });
     }
   };
-  
-  return (
-    loaded ? <Loader/> :
+
+  return loaded ? (
+    <Loader />
+  ) : (
     <Container>
       <form className={styles.form} onSubmit={handleSubmit}>
         <PlanInput data={planData} setData={setPlanData} />

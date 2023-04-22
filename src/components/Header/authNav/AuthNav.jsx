@@ -27,7 +27,10 @@ function AuthMenu({ personalPlan }) {
       <div className={css.authBox}>
         <NavLink
           className={({ isActive }) =>
-            personalPlan !== null && isActive ? css.NavLinkActive : css.NavLink
+            (personalPlan !== null && isActive) ||
+            (personalPlan === null && isActive)
+              ? css.NavLinkActive
+              : css.NavLink
           }
           to={ROUTES.personalPlan}
         >

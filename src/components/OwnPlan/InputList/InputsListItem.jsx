@@ -1,5 +1,5 @@
 import React from 'react';
-import css from './InputsList.module.css';
+import css from './InputsListItem.module.css';
 
 const InputsListItem = ({
   num,
@@ -13,19 +13,16 @@ const InputsListItem = ({
   disabled = false,
   onBlur = null,
   children,
-  onChange
+  onChange,
 }) => {
-  
-
   return (
-    <li className={css.item} id={num}
-    >
+    <li className={css.item} id={num}>
       {children ? (
         children
       ) : (
         <input
           className={css.input}
-          type='number'
+          type="number"
           name={name}
           value={value}
           placeholder={placeholder}

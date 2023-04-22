@@ -58,7 +58,11 @@ export const ModalLogin = () => {
   return (
     <div className={css.box}>
       <p className={css.title}>{t('login.title')}</p>
-      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        autoComplete="off"
+        className={css.form}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <label className={css.labelWrapper}>
           <span className={css.label}>{t('login.email')}</span>
           <input

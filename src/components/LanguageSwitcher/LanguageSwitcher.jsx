@@ -6,26 +6,23 @@ export default function LanguageSwitcher() {
   const lang = i18n.language;
 
   const switchLang = e => {
-    const newLang = e.target.value === "en" ? "uk" : "en"
+    const newLang = e.target.value === 'en' ? 'uk' : 'en';
     i18n.changeLanguage(newLang);
   };
 
-  const style = currentLang => lang === currentLang 
-    ? {"color": "#3a6af5",
-     "backgroundColor": "#fff"} : {"color": "#fff"}
+  const style = currentLang =>
+    lang === currentLang
+      ? { color: '#3a6af5', backgroundColor: '#fff' }
+      : { color: '#fff' };
 
   return (
     <label className={css.languageSwitcher}>
-      <input
-        type="checkbox"
-        value={lang}
-        onChange={switchLang}
-      />
+      <input type="checkbox" value={lang} onChange={switchLang} />
       <span className={`${css.Slider} ${css.Round}`}></span>
-      <span className={css.selectUa} style={style("en")}>
+      <span className={css.selectUa} style={style('en')}>
         EN
       </span>
-      <span  className={css.selectEn} style={style("uk")}>
+      <span className={css.selectEn} style={style('uk')}>
         UA
       </span>
     </label>

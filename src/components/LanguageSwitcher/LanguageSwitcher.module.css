@@ -1,7 +1,8 @@
 .languageSwitcher {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
+  /* position: fixed; */
+  top: 20px;
+  left: 90px;
+  position: absolute;
   display: inline-block;
   width: calc(24px * 2);
   height: 24px;
@@ -71,4 +72,10 @@ input:checked + .selectUa:before {
 
 .Round:before {
   border-radius: 50%;
+} 
+
+@media screen and (min-width: 768px ) {
+  .languageSwitcher {
+      left: 200px;
+  }
 }
