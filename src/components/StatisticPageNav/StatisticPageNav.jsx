@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import statisticsOperations from 'redux/statistics/statistics-operations';
 import { Calendar } from 'components/Calendar/Calendar';
 import css from './StatisticPage.module.css';
-import Loader from 'components/Loader/Loader';
 
 const StatisticPageNav = () => {
   const dispatch = useDispatch();
@@ -53,7 +52,7 @@ const StatisticPageNav = () => {
           <Calendar onChange={handleGetInfoPerMonth} />
         </div>
       </div>
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={null}>
         <Outlet />
       </Suspense>
     </>

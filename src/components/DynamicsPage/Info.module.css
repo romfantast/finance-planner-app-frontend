@@ -89,6 +89,14 @@
     border-radius: 16px;
     object-fit: cover;
 }
+.progressBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 254px;
+    height: 209px;
+    margin-bottom: 28px;
+}
 
 .uploadImageIcon {
     fill: #fff;
