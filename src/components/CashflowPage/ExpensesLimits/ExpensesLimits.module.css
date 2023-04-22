@@ -55,6 +55,7 @@
   line-height: 1.43;
   text-align: center;
   color: #3a6af5;
+  cursor: pointer;
 }
 
 .btnAdd {
@@ -67,6 +68,7 @@
   background-color: #3a6af5;
   border: none;
   border-bottom: 1px solid #f3f3f3;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {

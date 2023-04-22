@@ -50,8 +50,8 @@ const CashflowPage = () => {
     // eslint-disable-next-line default-case
     switch (e.target.id) {
       case 'expense':
-        if (formDataExpense.sum === "") {
-          Notify.warning('At first enter the sum of your expense.')
+        if (formDataExpense.sum === '') {
+          Notify.warning('At first enter the sum of your expense.');
         } else {
           const expenseData = {
             category: formDataExpense.category?.toLowerCase(),
@@ -64,7 +64,7 @@ const CashflowPage = () => {
             .then(response => {
               return response;
             })
-            .then(()=> Notify.success('Your expense was added!'))
+            .then(() => Notify.success('Your expense was added!'))
             .catch(error => Notify.failure(error));
           if (isModalOpen) toggleModal();
           setFormDataExpense({
@@ -87,7 +87,7 @@ const CashflowPage = () => {
           .then(response => {
             return response;
           })
-          .then(()=> Notify.success('Your income was added!'))
+          .then(() => Notify.success('Your income was added!'))
           .catch(error => Notify.failure(error));
         if (isModalOpen) toggleModal();
         setFormDataIncome({

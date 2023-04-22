@@ -99,6 +99,7 @@ export const TransactionDataList = ({ setFormData, formData }) => {
               name="category"
               onChange={handleChange}
               readOnly
+              required
             />
             <div className={css.options}>
               {category.map((el, i) => (
@@ -123,6 +124,7 @@ export const TransactionDataList = ({ setFormData, formData }) => {
           value={formData.comment}
           name="comment"
           placeholder={t('cashFlow.placeholderComment')}
+          required
         />
       </div>
       <div id="4" className={css.inputWrapper}>

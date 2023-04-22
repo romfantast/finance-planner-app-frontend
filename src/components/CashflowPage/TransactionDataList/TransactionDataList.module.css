@@ -30,6 +30,8 @@
 
 .input {
   display: block;
+  padding: 0 10px;
+  width: 100%;
   border: none;
   background: none;
   color: #f3f3f3;
