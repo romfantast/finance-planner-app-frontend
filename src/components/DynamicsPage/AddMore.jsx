@@ -24,8 +24,8 @@ const AddMore = () => {
         <span className={css.addMoreMeter}>{t('dynamics.1sqM')}</span>{' '}
         {t('dynamics.missingInfoSecond')}
         <span className={css.addMoreSum}>
-          {leftAcumulatedMoneyToMeter.length >= 13
-            ? leftAcumulatedMoneyToMeter.slice(0, 13) + '...'
+          {leftAcumulatedMoneyToMeter.toString().split('').length >= 13
+            ? leftAcumulatedMoneyToMeter.toString().slice(0, 13) + '...'
             : leftAcumulatedMoneyToMeter}
           &#8372;
         </span>

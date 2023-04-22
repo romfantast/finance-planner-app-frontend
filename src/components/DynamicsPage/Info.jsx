@@ -8,6 +8,8 @@ import { useMediaQuery } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { dynamicSelectors } from '../../redux/dynamics';
 import { dynamicOperation } from '../../redux/dynamics';
+import { getIsImageLoading } from 'redux/dynamics/dynamics-selectors';
+import { ProgressBar } from 'react-loader-spinner';
 
 const Info = () => {
   const { t } = useTranslation();
@@ -15,6 +17,7 @@ const Info = () => {
   const tablet = useMediaQuery('(max-width:1279px) and (min-width: 768px) ');
   const desktop = useMediaQuery('(min-width: 1280px)');
 
+  const isImageLoading = useSelector(getIsImageLoading);
   const {
     acumulatedAsPercentage,
     acumulatedMoney,
@@ -94,14 +97,32 @@ const Info = () => {
         </div>
         {imageURL ? (
           <div className={css.imgBlock}>
-            <img
-              src={`${imageURL}?${Math.random()}`}
-              alt="customers flat"
-              className={css.image}
-            />
-            <label htmlFor="changeFlatImage" className={css.changeImageLabel}>
-              {t('dynamics.changeImage')}
-            </label>
+            {isImageLoading ? (
+              <div className={css.progressBar}>
+                <ProgressBar
+                  height="80"
+                  width="80"
+                  ariaLabel="progress-bar-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="progress-bar-wrapper"
+                  borderColor="#f3f3f3"
+                  barColor="#3a6af5"
+                />
+              </div>
+            ) : (
+              <img
+                src={`${imageURL}?${Math.random()}`}
+                alt="customers flat"
+                className={css.image}
+              />
+            )}
+
+            {!isImageLoading && (
+              <label htmlFor="changeFlatImage" className={css.changeImageLabel}>
+                {t('dynamics.changeImage')}
+              </label>
+            )}
+
             <input
               onChange={handleSubmitImage}
               type="file"

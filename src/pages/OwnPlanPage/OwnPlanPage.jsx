@@ -21,7 +21,7 @@ import { Notify } from 'notiflix';
 const OwnPlanPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isPlanExist = useSelector(selectorPlanData);
+  const isPersonalPlan = useSelector(selectorPlanData);
   const newPlanData = useSelector(selectorPlanData);
   const accumPeriod = useSelector(selectorAccumPeriod);
   const loaded = useSelector(isLoading);
@@ -38,21 +38,21 @@ const OwnPlanPage = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (isPlanExist) {
+    if (isPersonalPlan !== null) {
       navigate('/cashflow');
     }
+
     periodPlan = {
       years: accumPeriod?.years,
       months: accumPeriod?.months,
     };
     if (
-      (!planData.salary ||
-        !planData.passiveIncome ||
-        !planData.savings ||
-        !planData.cost ||
-        !planData.footage ||
-        !planData.procent) &&
-      !isPlanExist
+      !planData.salary ||
+      !planData.passiveIncome ||
+      !planData.savings ||
+      !planData.cost ||
+      !planData.footage ||
+      !planData.procent
     ) {
       Notify.warning('All fields is required.');
     }
@@ -66,6 +66,7 @@ const OwnPlanPage = () => {
       )
         .then(() => {
           Notify.success('Your personal plan was saved!');
+          navigate('/cashflow');
         })
         .catch(err => {
           Notify.failure(err.message);
