@@ -46,16 +46,16 @@ const OwnPlanPage = () => {
       years: accumPeriod?.years,
       months: accumPeriod?.months,
     };
-    if (
-      !planData.salary ||
-      !planData.passiveIncome ||
-      !planData.savings ||
-      !planData.cost ||
-      !planData.footage ||
-      !planData.procent
-    ) {
-      Notify.warning('All fields is required.');
-    }
+    // if (
+    //   !planData.salary ||
+    //   !planData.passiveIncome ||
+    //   !planData.savings ||
+    //   !planData.cost ||
+    //   !planData.footage ||
+    //   !planData.procent
+    // ) {
+    //   // Notify.warning('All fields is required');
+    // }
     // If user is new => add new data to DB and show the succes message
     if (newPlanData === null) {
       dispatch(
@@ -65,8 +65,19 @@ const OwnPlanPage = () => {
         })
       )
         .then(() => {
-          Notify.success('Your personal plan was saved!');
-          navigate('/cashflow');
+          if (
+            !planData.salary ||
+            !planData.passiveIncome ||
+            !planData.savings ||
+            !planData.cost ||
+            !planData.footage ||
+            !planData.procent
+          ) {
+            Notify.warning('All fields is required');
+          } else {
+            Notify.success('Your personal plan was saved!');
+          }
+          // navigate('/cashflow');
         })
         .catch(err => {
           Notify.failure(err.message);
@@ -83,7 +94,7 @@ const OwnPlanPage = () => {
           Notify.success('Your personal plan was refreshed!');
         })
         .then(res => {
-          navigate('/cashflow');
+          // navigate('/cashflow');
         })
         .catch(err => {
           Notify.failure(err.message);

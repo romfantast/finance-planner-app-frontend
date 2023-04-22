@@ -12,7 +12,7 @@ export const Verified = props => {
   const { t } = useTranslation();
   const location = useLocation();
   const verificationToken = location.pathname.split('/')[2];
-  const [sec, setSec] = useState(10);
+  const [sec, setSec] = useState(3);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(getUser);
@@ -22,11 +22,13 @@ export const Verified = props => {
       setSec(prev => prev - 1);
     }, 1000);
     if (sec === 0) {
+      setSec(0);
+      clearInterval(intervalId);
       const credentials = {
         email: user.email,
         password: user.password,
       };
-      setSec(prev => (prev = 0));
+
       dispatch(authOperations.verify({ verificationToken }))
         .then(_ => {
           dispatch(authOperations.login(credentials))

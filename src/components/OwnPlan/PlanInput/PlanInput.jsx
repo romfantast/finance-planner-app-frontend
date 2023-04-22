@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { Notify } from 'notiflix';
 import { addPersonalPlanPreAPI } from 'redux/plan/plan-operations';
 import { selectorPlanData } from 'redux/plan/plan-selectors';
 import InputsListItem from '../InputList/InputsListItem';
 import styles from './PlanInput.module.css';
 import { useTranslation } from 'react-i18next';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { balance } from 'redux/auth/auth-selectors';
 
 const PlanInput = ({ data, setData }) => {
@@ -57,7 +57,10 @@ const PlanInput = ({ data, setData }) => {
   };
 
   const onBlur = () => {
-    if (Object.values(data).filter(element => element === '').length) return;
+    if (Object.values(data).filter(element => element === '').length) {
+      return;
+    }
+
     if (JSON.stringify(curPlanData) === JSON.stringify(data)) return;
     dispatch(addPersonalPlanPreAPI(data));
   };

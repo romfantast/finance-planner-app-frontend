@@ -29,6 +29,7 @@ const InputsListItem = ({
           onChange={onChange}
           onBlur={onBlur}
           disabled={disabled}
+          required
         />
       )}
 
