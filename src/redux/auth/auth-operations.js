@@ -16,7 +16,7 @@ axios.interceptors.response.use(
   error => {
     if (error.response.status === 401) {
       localStorage.removeItem('persist:auth');
-      window.location.href = '/finance-planner-app/login';
+      window.location.href = '/login';
       return Promise.reject(error);
     }
   }
